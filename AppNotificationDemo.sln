@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFAppNotificationDemo", "KFAppNotificationDemo\KFAppNotificationDemo.csproj", "{8BE4B294-5D6A-4F26-8E46-123A556EBE07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppNotificationDemo", "AppNotificationDemo\AppNotificationDemo.csproj", "{8BE4B294-5D6A-4F26-8E46-123A556EBE07}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppBackend", "AppBackend\AppBackend.csproj", "{1C38ED46-E5A3-4FBE-9FFA-A06974AB462E}"
 EndProject
