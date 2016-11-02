@@ -44,6 +44,7 @@ namespace SimulatedDevice
                 deviceTracker = new DeviceTracker(connectionString, 20, 10);
                 CancellationTokenSource tokenSource = new CancellationTokenSource();
                 Task shuffleTask = deviceTracker.ShuffleDevicesAsync(tokenSource.Token);
+                shuffleTask.Wait();
             }
             catch (Exception exception)
             {
@@ -51,6 +52,7 @@ namespace SimulatedDevice
                 Console.WriteLine("Press Enter to exit program. Hope to see you soon again.");
                 Console.WriteLine(exception.Message);
                 Console.Write(exception.StackTrace);
+                Console.ReadLine();
             }
         }
 

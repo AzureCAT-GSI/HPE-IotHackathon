@@ -61,6 +61,9 @@ namespace SimulatedDevice.Models
             //Send the event to IoTHub
             if (null != deviceClient)
             {
+                try
+                {
+
                 GeofenceEvent geoEvent = new Models.GeofenceEvent() {
                     geofence_event = e.Event,
                     geofence_id = e.geofence_id,
@@ -69,6 +72,14 @@ namespace SimulatedDevice.Models
                 Message message = new Message(Encoding.UTF8.GetBytes(await JsonConvert.SerializeObjectAsync(geoEvent)));
                 await deviceClient.SendEventAsync(message);
                 Console.WriteLine($"Wow, I've already sent {++numberMessages} messages during this session ");
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine("Something unforeseen happend and I can't continue. See details below:");
+                    Console.WriteLine(exception.Message);
+                    Console.Write(exception.StackTrace);
+                    Console.ReadLine();
+                }
             }
         }
 
