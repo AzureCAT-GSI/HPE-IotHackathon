@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SimulatedDevice.Models;
+using System.Threading;
 
 namespace SimulatedDevice
 {
@@ -14,13 +16,26 @@ namespace SimulatedDevice
         static DeviceClient deviceClient;
         static string iotHubUri = "kfIoThub.azure-devices.net";
         static string deviceKey = "8oiJKeEljWDdTPrSkDTaEmqKvGGlS2BPtjFCrgt/F6U=";
+        static string deviceTrackerConnectionString = "HostName=kfIoThub.azure-devices.net;DeviceId=DeviceTracker;SharedAccessKey=AfRCGpgI5yIyrS7JofD+cbcrLVmFo+ikqTTMzCM/KAE=";
+
+        static DeviceTracker deviceTracker;
+
         static void Main(string[] args)
         {
-            deviceClient = DeviceClient.Create(iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey("Device_1", deviceKey));
+            //deviceClient = DeviceClient.Create(iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey("Device_1", deviceKey));
 
-            SendDeviceToCloudMessagesAsync();
+            //SendDeviceToCloudMessagesAsync();
 
-            Console.ReadLine();
+            //Console.ReadLine();
+
+            deviceTracker = new DeviceTracker(deviceTrackerConnectionString, 20, 10);
+            CancellationTokenSource tokenSource = new CancellationTokenSource();
+            deviceTracker.ShuffleDevicesAsync(tokenSource.Token).Wait();
+
+            while (true)
+            {
+                Thread.Sleep(100);
+            }
         }
 
         private static async void SendDeviceToCloudMessagesAsync()

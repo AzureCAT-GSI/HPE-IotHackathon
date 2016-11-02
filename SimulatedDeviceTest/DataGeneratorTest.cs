@@ -42,7 +42,7 @@ namespace SimulatedDeviceTest
 			Assert.AreEqual(maxRooms, DataGenerator.RoomNames.Count);
 		}
 
-		[TestMethod]
+        [TestMethod]
 		public void ShouldHashMacaddress()
 		{
 			string mac = DataGenerator.GenerateMACAddress();

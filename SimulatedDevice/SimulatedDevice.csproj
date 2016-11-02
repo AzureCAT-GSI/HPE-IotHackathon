@@ -144,6 +144,7 @@
     <Compile Include="Helpers.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\DeviceMoveEventArgs.cs" />
+    <Compile Include="Models\GeofenceEvent.cs" />
     <Compile Include="Models\GeofenceNotifyResult.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\DeviceTracker.cs" />

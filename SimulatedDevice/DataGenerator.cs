@@ -54,9 +54,8 @@ namespace SimulatedDevice
 
 		}
 
-		public static string GetRoomName()
+		public static string GetRandomRoom()
 		{			
-			string roomName = string.Empty;
 			int roomIndex = randNum.Next(0, RoomNames.Count);
 			return RoomNames[roomIndex];
 		}
@@ -74,24 +73,20 @@ namespace SimulatedDevice
 
 		public static List<Room> GenerateRooms(int MAX_ROOMS)
 		{
-			List<Room> allRooms = new List<Room>();
-			List<string> generatedNames = new List<string>();
-			for (int i = 0; i < MAX_ROOMS; i++)
-			{
-				Room newRoom = new Room();
-				newRoom.Id = Guid.NewGuid().ToString();
-				while(true) {
-					string roomName = GetRoomName();
-					if (!generatedNames.Contains(roomName))
-					{
-						newRoom.Name = roomName;
-						generatedNames.Add(roomName);
-						break;
-					}
-				}
-				allRooms.Add(newRoom);
-			}
-			return allRooms;
+			List<Room> result = new List<Room>();
+            while (result.Count < MAX_ROOMS)
+            {
+                string roomName = string.Empty;
+                while (string.IsNullOrEmpty(roomName) || result.Exists(room => room.Name == roomName))
+                {
+                    roomName = GetRandomRoom();
+                }
+                Room newRoom = new Room();
+                newRoom.Id = Guid.NewGuid().ToString();
+                newRoom.Name = roomName;
+                result.Add(newRoom);
+            }
+			return result;
 		}
 
 		public void MoveDevice(Device deviceToMove)

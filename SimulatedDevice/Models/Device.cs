@@ -23,6 +23,8 @@ namespace SimulatedDevice.Models
 		[JsonProperty("StaMac")]
 		public string MacAddress { get; set; }
 
+        public Room CurrentRoom { get; set;  }
+
 		[JsonProperty("StaMac")]
 		public string HashedMac
 		{

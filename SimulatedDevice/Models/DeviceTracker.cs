@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Devices;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Client.Exceptions;
+using System.Threading;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace SimulatedDevice.Models
 {
@@ -17,12 +20,13 @@ namespace SimulatedDevice.Models
 		static string iotHubUri = "kfIoThub.azure-devices.net";
 		static string deviceKey = "8oiJKeEljWDdTPrSkDTaEmqKvGGlS2BPtjFCrgt/F6U=";
 
-		static Random randDevices = new Random();
-		static Random randRooms = new Random();
+		static Random randDevices = new Random((int)DateTime.Now.TimeOfDay.TotalMilliseconds);
+		static Random randRooms = new Random((int)DateTime.Now.TimeOfDay.TotalMilliseconds);
 
-		//static RegistryManager registryManager;
-		static string connectionString = "HostName=kfIoThub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=3rQBsxaPSLG05944GfZpMkDchq9IjCyP76Kayub7mK4=";
-		//static void Main(string[] args)
+        static Random waitTimerRandomizer = new Random((int)DateTime.Now.TimeOfDay.TotalMilliseconds);
+        //        static string connectionString = "HostName=kfIoThub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=3rQBsxaPSLG05944GfZpMkDchq9IjCyP76Kayub7mK4=";
+        private string connectionString;
+        //static void Main(string[] args)
 		//{
 		//	//registryManager = RegistryManager.CreateFromConnectionString(connectionString);
 		//	AddDeviceAsync().Wait();
@@ -31,79 +35,79 @@ namespace SimulatedDevice.Models
 
 		//Create sample devices
 
-		public DeviceTracker()
-		{
-			
-		}
+        public DeviceTracker(string connectionstring, int maxDevices, int rooms)
+        {
+            Devices = DataGenerator.GenerateDevices(maxDevices);
+            Console.WriteLine("Setting up devices:");
+            foreach (Device device in Devices)
+            {
+                Console.WriteLine($"New Device {device.MacAddress}");
+            }
 
-		public DeviceTracker(int NumDevices, int NumRooms)
-		{
-			Devices = DataGenerator.GenerateDevices(NumDevices);
-			registerDevicesWithHub();
-			Rooms = DataGenerator.GenerateRooms(NumRooms);
-		}
+            Rooms = DataGenerator.GenerateRooms(rooms);
+            Console.WriteLine("Setting up rooms:");
+            foreach (Room room in Rooms)
+            {
+                Console.WriteLine($"Selected Room {room.Name}");
+                room.OnDeviceMoved += Room_OnDeviceMoved;
+            }
+            Console.WriteLine("Setting up connecting IoTHub:");
 
-		private void registerDevicesWithHub()
-		{
-			if (Devices != null)
-			{
-				foreach (Device d in Devices)
-				{
-					//deviceClient = DeviceClient.Create(iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey(d.MacAddress, deviceKey));
-					//string deviceId = "Device_1";
-					//Device device;
-					//try
-					//{
-					//	device = await registryManager.AddDeviceAsync(new Device(deviceId));
-					//}
-					//catch (DeviceAlreadyExistsException)
-					//{
-					//	device = await registryManager.GetDeviceAsync(deviceId);
-					//}
-					//Console.WriteLine("Generated device key: {0}", device.Authentication.SymmetricKey.PrimaryKey);
-				}
-			}
-		}
+            deviceClient = DeviceClient.CreateFromConnectionString(connectionstring);
+            deviceClient.OpenAsync().Wait();
+        }
 
-		public void ShuffleDevices()
+        private async void Room_OnDeviceMoved(object sender, DeviceMoveEventArgs e)
+        {
+            //Send the event to IoTHub
+            if (null != deviceClient)
+            {
+                GeofenceEvent geoEvent = new Models.GeofenceEvent() {
+                    geofence_event = e.Event,
+                    geofence_id = e.geofence_id,
+                    geofence_name = e.RoomName,
+                    hashed_sta_mac = e.DeviceId};
+                Message message = new Message(Encoding.UTF8.GetBytes(await JsonConvert.SerializeObjectAsync(geoEvent)));
+                await deviceClient.SendEventAsync(message);
+            }
+        }
+
+		public async Task ShuffleDevicesAsync(CancellationToken token)
 		{
 
-			Device currentDevice = null;
-			Device lastDevice = null;
-			Room currentRoom = null;
-			Room lastRoom = null;
+            //run in a loop
+            //at randomized interval
+            //pick a random device
+            //move it IN a room or OUT
+
+            Device currentDevice = null;
+
+            List<Device> devices = new List<Device>();
 			//Move them around
-			while (true)
+			while (!token.IsCancellationRequested)
 			{
+
 				//Pick a device
 				currentDevice = Devices[randDevices.Next(0, Devices.Count)];
 				Console.WriteLine($"Picking device {currentDevice.MacAddress}");
-				if (lastDevice != null && lastDevice != currentDevice)
-				{
-					lastDevice = currentDevice;
-				}
 
-				//Pick a room
-				currentRoom = Rooms[randRooms.Next(0, Rooms.Count)];
-				Console.WriteLine($"Picking room {currentRoom.Name}");
-
-				if (lastRoom != null && lastRoom != currentRoom)
-				{
-					lastRoom = currentRoom;
-				}
-
-				//Move in
-				currentRoom.MoveIn(currentDevice);
-				Console.WriteLine($"Moving device into room");
+                if (null != currentDevice.CurrentRoom)
+                {
+                    Console.WriteLine($"Moving device out of room {currentDevice.CurrentRoom.Name}");
+                    currentDevice.CurrentRoom.MoveOut(currentDevice);
+                }
+                else
+                {
+                    //Pick a room
+                    Room room = Rooms[randRooms.Next(0, Rooms.Count)];
+                    Console.WriteLine($"Moving device into room {room.Name}");
+                    room.MoveIn(currentDevice);
+                }
 
 				//Sleep
-				int WaitTime = new Random(10).Next(0, 10);
-				Console.WriteLine($"Waiting for {WaitTime.ToString()} seconds");
-				Task.Delay(WaitTime);
-				//Move the last device out of the room
-				lastRoom.MoveOut(lastDevice);
-				Console.WriteLine($"Moving device out of room");
-
+				int waitTime = waitTimerRandomizer.Next(0, 10);
+				Console.WriteLine($"Waiting for {waitTime.ToString()} seconds");
+				await Task.Delay(waitTime * 1000);
 			}
 		}
 

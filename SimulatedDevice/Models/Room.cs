@@ -7,16 +7,21 @@ using Newtonsoft.Json;
 
 namespace SimulatedDevice.Models
 {
-	public class Room
+    public delegate void DeviceMovedEventHandler(object sender, DeviceMoveEventArgs e);
+
+    public class Room
 	{
 		List<Device> devicesInRoom = null;
+
 		[JsonProperty("geofence_name")]
 		public string Name { get; set; }
 		[JsonProperty("geofence_id")]
 		public string Id { get; set; }
 		List<DwellTimeIndex> deviceDwellTimeIndex = null;
 
-		public Room()
+        public event DeviceMovedEventHandler OnDeviceMoved;
+
+        public Room()
 		{
 			Id = Guid.NewGuid().ToString().Replace("-", "").ToLower();
 			devicesInRoom = new List<Device>();
@@ -33,10 +38,12 @@ namespace SimulatedDevice.Models
 			if (!devicesInRoom.Contains(deviceToAdd))
 			{
 				devicesInRoom.Add(deviceToAdd);
+                deviceToAdd.CurrentRoom = this;
+
 				DwellTimeIndex ds = new DwellTimeIndex();
 				ds.DeviceToIndex = deviceToAdd;
 				deviceDwellTimeIndex.Add(ds);
-				RaiseMoveEvent(deviceToAdd, "ZONE_IN", this);
+				RaiseMoveEvent(deviceToAdd, "ZONE_IN");
 			}
 		}
 
@@ -45,27 +52,28 @@ namespace SimulatedDevice.Models
 			if (devicesInRoom.Contains(deviceToRemove))
 			{
 				devicesInRoom.Remove(deviceToRemove);
+                deviceToRemove.CurrentRoom = null;
 				//DwellTimeIndex ds = deviceDwellTimeIndex.Find(;
 				//ds.DeviceId = deviceToAdd.addr;
 				//int dwellTime = deviceDwellTimeIndex[deviceToRemove.Id].CalculateDwellTime();
 				//deviceDwellTimeIndex.Remove(deviceToRemove);
 
-				RaiseMoveEvent(deviceToRemove, "ZONE_OUT", this);
+				RaiseMoveEvent(deviceToRemove, "ZONE_OUT");
 			}
 		}
 
 
-		public static EventArgs RaiseMoveEvent(Device deviceToAdd, string ZoneEventType, Room room)
+		public void RaiseMoveEvent(Device deviceToAdd, string zoneEventType)
 		{
 			DeviceMoveEventArgs args = new DeviceMoveEventArgs();
-			args.RoomName = room.Name;
-			args.geofence_id = room.Id;
+			args.RoomName = this.Name;
+			args.geofence_id = this.Id;
 			args.DeviceId = deviceToAdd.MacAddress;
-			args.Event = ZoneEventType;
-			return args;
-		}
+			args.Event = zoneEventType;
+            OnDeviceMoved?.Invoke(this, args);
+        }
 
-		internal class DwellTimeIndex
+        internal class DwellTimeIndex
 		{
 			public DwellTimeIndex()
 			{
