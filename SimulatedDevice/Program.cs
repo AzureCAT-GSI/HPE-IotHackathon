@@ -14,28 +14,57 @@ namespace SimulatedDevice
     class Program
     {
         static DeviceClient deviceClient;
-        static string iotHubUri = "kfIoThub.azure-devices.net";
-        static string deviceKey = "8oiJKeEljWDdTPrSkDTaEmqKvGGlS2BPtjFCrgt/F6U=";
-        static string deviceTrackerConnectionString = "HostName=kfIoThub.azure-devices.net;DeviceId=DeviceTracker;SharedAccessKey=AfRCGpgI5yIyrS7JofD+cbcrLVmFo+ikqTTMzCM/KAE=";
 
         static DeviceTracker deviceTracker;
 
         static void Main(string[] args)
         {
-            //deviceClient = DeviceClient.Create(iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey("Device_1", deviceKey));
-
-            //SendDeviceToCloudMessagesAsync();
-
-            //Console.ReadLine();
-
-            deviceTracker = new DeviceTracker(deviceTrackerConnectionString, 20, 10);
-            CancellationTokenSource tokenSource = new CancellationTokenSource();
-            deviceTracker.ShuffleDevicesAsync(tokenSource.Token).Wait();
-
-            while (true)
+            ConsoleColor defaultColor = Console.ForegroundColor;
+            Console.WriteLine("Please paste a Device-Enabled IoTHUb ConnectionString. It should look like");
+            Console.Write("HostName=");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("YOURHOSTNAME");
+            Console.ForegroundColor = defaultColor;
+            Console.Write(".azure -devices.net;DeviceId=");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("YOURDEVICEID");
+            Console.ForegroundColor = defaultColor;
+            Console.Write("SharedAccessKey=");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("SHAREDACCESSKEY");
+            Console.ForegroundColor = defaultColor;
+            string connectionString = string.Empty;
+            while (!ParseConnectionString(connectionString))
             {
-                Thread.Sleep(100);
+                Console.Write("ConnectionString: ");
+                connectionString = Console.ReadLine();
             }
+            try
+            {
+                deviceTracker = new DeviceTracker(connectionString, 20, 10);
+                CancellationTokenSource tokenSource = new CancellationTokenSource();
+                Task shuffleTask = deviceTracker.ShuffleDevicesAsync(tokenSource.Token);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Something unforeseen happend and I can't continue. See details below:");
+                Console.WriteLine("Press Enter to exit program. Hope to see you soon again.");
+                Console.WriteLine(exception.Message);
+                Console.Write(exception.StackTrace);
+            }
+        }
+
+        static bool ParseConnectionString(string connectionString)
+        {
+            if (!string.IsNullOrWhiteSpace(connectionString))
+            {
+                if (connectionString.Contains("azure-devices.net") &&
+                    connectionString.Contains("DeviceId=") &&
+                    connectionString.Contains("SharedAccessKey="))
+                    //assume a valid connectionstring
+                    return true;
+            }
+            return false;
         }
 
         private static async void SendDeviceToCloudMessagesAsync()

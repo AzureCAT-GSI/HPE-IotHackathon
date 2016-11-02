@@ -17,15 +17,14 @@ namespace SimulatedDevice.Models
 		public List<Device> Devices = new List<Device>();
 		public List<Room> Rooms = new List<Room>();
 		static DeviceClient deviceClient;
-		static string iotHubUri = "kfIoThub.azure-devices.net";
-		static string deviceKey = "8oiJKeEljWDdTPrSkDTaEmqKvGGlS2BPtjFCrgt/F6U=";
 
 		static Random randDevices = new Random((int)DateTime.Now.TimeOfDay.TotalMilliseconds);
 		static Random randRooms = new Random((int)DateTime.Now.TimeOfDay.TotalMilliseconds);
 
         static Random waitTimerRandomizer = new Random((int)DateTime.Now.TimeOfDay.TotalMilliseconds);
+
+        int numberMessages;            
         //        static string connectionString = "HostName=kfIoThub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=3rQBsxaPSLG05944GfZpMkDchq9IjCyP76Kayub7mK4=";
-        private string connectionString;
         //static void Main(string[] args)
 		//{
 		//	//registryManager = RegistryManager.CreateFromConnectionString(connectionString);
@@ -69,6 +68,7 @@ namespace SimulatedDevice.Models
                     hashed_sta_mac = e.DeviceId};
                 Message message = new Message(Encoding.UTF8.GetBytes(await JsonConvert.SerializeObjectAsync(geoEvent)));
                 await deviceClient.SendEventAsync(message);
+                Console.WriteLine($"Wow, I've already sent {++numberMessages} messages during this session ");
             }
         }
 
