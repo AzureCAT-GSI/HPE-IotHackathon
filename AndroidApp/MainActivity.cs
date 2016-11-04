@@ -24,7 +24,14 @@ namespace AndroidApp
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.button1);
 
+            button.Click += Button_Click;
             RegisterWithGCM();
+        }
+
+        private void Button_Click(object sender, System.EventArgs e)
+        {
+            Button button = FindViewById<Button>(Resource.Id.button1);
+            button.Text = "You clicked me";
         }
 
         private void RegisterWithGCM()

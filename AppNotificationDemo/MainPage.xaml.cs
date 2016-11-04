@@ -48,9 +48,7 @@ namespace KFAppNotificationDemo
             // Displays the registration ID so you know it was successful
             if (result.RegistrationId != null)
             {
-                var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
-                dialog.Commands.Add(new UICommand("OK"));
-                await dialog.ShowAsync();
+                textBox.Text="Registration successful: " + result.RegistrationId;
             }
 
         }

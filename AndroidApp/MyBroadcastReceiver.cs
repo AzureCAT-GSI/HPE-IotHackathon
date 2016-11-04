@@ -14,14 +14,10 @@ using Android.Util;
 using Gcm.Client;
 using WindowsAzure.Messaging;
 
-[assembly: Permission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
 [assembly: UsesPermission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
-[assembly: UsesPermission(Name = "com.google.android.c2dm.permission.RECEIVE")]
+[assembly: UsesPermission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
+[assembly: UsesPermission(Name = "com.google.android.c2dm.permission.receive")]
 
-//GET_ACCOUNTS is needed only for Android versions 4.0.3 and below
-[assembly: UsesPermission(Name = "android.permission.GET_ACCOUNTS")]
-[assembly: UsesPermission(Name = "android.permission.INTERNET")]
-[assembly: UsesPermission(Name = "android.permission.WAKE_LOCK")]
 namespace AndroidApp
 {
     [BroadcastReceiver(Permission = Gcm.Client.Constants.PERMISSION_GCM_INTENTS)]
@@ -68,8 +64,8 @@ namespace AndroidApp
                 Log.Error(MyBroadcastReceiver.TAG, ex.Message);
             }
 
-            //var tags = new List<string>() { "falcons" }; // create tags if you want
-            var tags = new List<string>() { };
+            var tags = new List<string>() { "MyBroadcastReceiver-GCM" }; // create tags if you want
+           // var tags = new List<string>() { };
 
             try
             {
@@ -121,6 +117,7 @@ namespace AndroidApp
             //Set the notification info
             //we use the pending intent, passing our ui intent over, which will get called
             //when the notification is tapped.
+
             notification.SetLatestEventInfo(this, title, desc, PendingIntent.GetActivity(this, 0, uiIntent, 0));
 
             //Show the notification
