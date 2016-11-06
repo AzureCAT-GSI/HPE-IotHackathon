@@ -19,6 +19,7 @@ using Windows.Networking.PushNotifications;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Messaging;
+using GSIAppNotificationDemo;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -35,26 +36,20 @@ namespace KFAppNotificationDemo
             this.InitializeComponent();
         }
 
-        private async void InitNotificationsAsync(string tag)
+        private async void ShowConf()
         {
-            var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-
-            var hub = new NotificationHub("kfnotificationhub", "Endpoint=sb://kfarubaiotdemo.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=VL9FZEckq+lIt3ejtgj7lI9h0b0hOCB9kc5nf4I5fKE=");
-            string[] userTag = new string[1];
-            userTag[0] = tag;
-
-            var result = await hub.RegisterNativeAsync(channel.Uri, userTag);
-
-            // Displays the registration ID so you know it was successful
-            if (result.RegistrationId != null)
+            ContentDialog1 dialog = new ContentDialog1()
             {
-                textBox.Text="Registration successful: " + result.RegistrationId;
-            }
+                Title = "Configure connection",
+                PrimaryButtonText = "Register"
+            };
 
+            await dialog.ShowAsync();
         }
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            InitNotificationsAsync(tag.Text);
+
+            ShowConf();
         }
     }
 }

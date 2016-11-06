@@ -7,14 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-        <TextBox x:Name="tag" PlaceholderText="tag" Text="b158a026e9416aa2a307541bfe205ae44b4ca660" Margin="10,60,59,494" MaxHeight="1" ></TextBox>
-        <Button x:Name="button" Content="Register" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Click="button_Click"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="10,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="20" RenderTransformOrigin="0.5,0.5" Width="291">
-            <TextBox.RenderTransform>
-                <CompositeTransform ScaleY="-1"/>
-            </TextBox.RenderTransform>
-        </TextBox>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" VerticalAlignment="Top" Height="400">
+        <Button x:Name="button" Content="Configure" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Click="button_Click"/>
     </Grid>
 </Page>
