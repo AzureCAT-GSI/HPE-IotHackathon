@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Networking.PushNotifications;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -47,7 +48,9 @@ namespace GSIAppNotificationDemo
             // Displays the registration ID so you know it was successful
             if (result.RegistrationId != null)
             {
-               // txtResult.Text = "Registration successful: " + result.RegistrationId;
+                // txtResult.Text = ;
+                var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+                await dialog.ShowAsync();
             }
 
 
