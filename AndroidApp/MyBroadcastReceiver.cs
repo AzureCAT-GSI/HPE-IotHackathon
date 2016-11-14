@@ -31,7 +31,6 @@ namespace AndroidApp
     {
         public static string[] SENDER_IDS = new string[] { Constants.SenderID };
 
-        public const string TAG = "MyBroadcastReceiver-GCM";
     }
 
     [Service] // Must use the service tag
@@ -42,17 +41,17 @@ namespace AndroidApp
 
         public PushHandlerService() : base(Constants.SenderID)
         {
-            Log.Info(MyBroadcastReceiver.TAG, "PushHandlerService() constructor");
+            Log.Info(Constants.Tag, "PushHandlerService() constructor");
         }
 
         protected override void OnRegistered(Context context, string registrationId)
         {
-            Log.Verbose(MyBroadcastReceiver.TAG, "GCM Registered: " + registrationId);
+            Log.Verbose(Constants.Tag, "GCM Registered: " + registrationId);
             RegistrationID = registrationId;
 
             createNotification("PushHandlerService-GCM Registered...",
                                 "The device has been Registered!");
-
+            
             Hub = new NotificationHub(Constants.NotificationHubName, Constants.ListenConnectionString,
                                         context);
             try
@@ -61,10 +60,10 @@ namespace AndroidApp
             }
             catch (Exception ex)
             {
-                Log.Error(MyBroadcastReceiver.TAG, ex.Message);
+                Log.Error(Constants.Tag, ex.Message);
             }
 
-            var tags = new List<string>() { "MyBroadcastReceiver-GCM" }; // create tags if you want
+            var tags = new List<string>() { Constants.Tag }; // create tags if you want
            // var tags = new List<string>() { };
 
             try
@@ -73,13 +72,13 @@ namespace AndroidApp
             }
             catch (Exception ex)
             {
-                Log.Error(MyBroadcastReceiver.TAG, ex.Message);
+                Log.Error(Constants.Tag, ex.Message);
             }
         }
 
         protected override void OnMessage(Context context, Intent intent)
         {
-            Log.Info(MyBroadcastReceiver.TAG, "GCM Message Received!");
+            Log.Info(Constants.Tag, "GCM Message Received!");
 
             var msg = new StringBuilder();
 
@@ -142,21 +141,21 @@ namespace AndroidApp
 
         protected override void OnUnRegistered(Context context, string registrationId)
         {
-            Log.Verbose(MyBroadcastReceiver.TAG, "GCM Unregistered: " + registrationId);
+            Log.Verbose(Constants.Tag, "GCM Unregistered: " + registrationId);
 
             createNotification("GCM Unregistered...", "The device has been unregistered!");
         }
 
         protected override bool OnRecoverableError(Context context, string errorId)
         {
-            Log.Warn(MyBroadcastReceiver.TAG, "Recoverable Error: " + errorId);
+            Log.Warn(Constants.Tag, "Recoverable Error: " + errorId);
 
             return base.OnRecoverableError(context, errorId);
         }
 
         protected override void OnError(Context context, string errorId)
         {
-            Log.Error(MyBroadcastReceiver.TAG, "GCM Error: " + errorId);
+            Log.Error(Constants.Tag, "GCM Error: " + errorId);
         }
     }
 }

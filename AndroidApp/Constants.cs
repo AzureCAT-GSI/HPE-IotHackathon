@@ -12,10 +12,12 @@ using Android.Widget;
 
 namespace AndroidApp
 {
-    public static class Constants
+    public  class Constants
     {
         public const string SenderID = "1016049643626"; // Google API Project Number
-        public const string ListenConnectionString = "Endpoint=sb://kfarubaiotdemo.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=VL9FZEckq+lIt3ejtgj7lI9h0b0hOCB9kc5nf4I5fKE=";
-        public const string NotificationHubName = "kfnotificationhub";
+        public static string ListenConnectionString = "Endpoint=sb://kfarubaiotdemo.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=VL9FZEckq+lIt3ejtgj7lI9h0b0hOCB9kc5nf4I5fKE=";
+        public static string NotificationHubName = "kfnotificationhub";
+        public static string Tag = "";
+
     }
 }
