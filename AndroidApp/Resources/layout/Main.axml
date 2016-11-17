@@ -4,44 +4,64 @@
     p1:layout_height="fill_parent"
     p1:stretchColumns="1"
     p1:id="@+id/tableLayout1">
-  <TableRow
-      p1:id="@+id/tableRow1">
-    <TextView
-        p1:text="Notification Hub"
-        p1:padding="3dip" />
-    <EditText
-        p1:id="@+id/txtNotificationHub"
-        p1:layout_width="match_parent"
-        p1:padding="3dip" />
-  </TableRow>
-  <TableRow
-      p1:id="@+id/tableRow2">
-    <TextView
-        p1:text="Connection String"
-        p1:padding="3dip" />
-    <EditText
-        p1:id="@+id/txtConnectionString"
-        p1:layout_width="match_parent"
-        p1:layout_height="wrap_content"
-        p1:padding="3dip"></EditText>
-  </TableRow>
-  <TableRow
-      p1:id="@+id/tableRow3">
-    <TextView
-        p1:text="Tag"
-        p1:padding="3dip" />
-    <EditText
-        p1:id="@+id/txtTag"
-        p1:layout_width="match_parent"
-        p1:padding="3dip" />
-  </TableRow>
-  <TableRow
-      p1:id="@+id/tableRow4">
-    <Button
-        p1:text="Register"
-        p1:layout_width="match_parent"
-        p1:layout_height="wrap_content"
-        p1:id="@+id/button1"
-        p1:clickable="true" />
-  </TableRow>
+    <TableRow
+        p1:id="@+id/tableRow1">
+        <TextView
+            p1:text="Notification Hub"
+            p1:padding="3dip" />
+        <EditText
+            p1:id="@+id/txtNotificationHub"
+            p1:layout_width="match_parent"
+            p1:padding="3dip" />
+    </TableRow>
+    <TableRow
+        p1:id="@+id/tableRow2">
+        <TextView
+            p1:text="Policy"
+            p1:padding="3dip" />
+        <EditText
+            p1:id="@+id/txtPolicy"
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:minLines="2"
+            p1:lines="3"
+            p1:padding="3dip" />
+    </TableRow>
+    <TableRow
+        p1:id="@+id/tableRow3">
+        <TextView
+            p1:text="Tag"
+            p1:padding="3dip" />
+        <EditText
+            p1:id="@+id/txtTag"
+            p1:layout_width="match_parent"
+            p1:padding="3dip" />
+    </TableRow>
+    <TableRow
+        p1:id="@+id/tableRow4">
+        <Button
+            p1:text="Register"
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/btnRegister"
+            p1:clickable="true" />
+    </TableRow>
+    <TableRow
+        p1:id="@+id/tableRow5">
+        <Button
+            p1:text="Unregister"
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/btnUnregister"
+            p1:clickable="true" />
+    </TableRow>
+    <TableRow
+        p1:id="@+id/tableRow5">
+        <Button
+            p1:text="Save"
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/bnSave"
+            p1:clickable="true" />
+    </TableRow>
 </TableLayout>

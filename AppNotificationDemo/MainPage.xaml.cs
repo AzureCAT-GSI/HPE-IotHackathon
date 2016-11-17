@@ -51,5 +51,10 @@ namespace KFAppNotificationDemo
 
             ShowConf();
         }
+
+        private void button_Close(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

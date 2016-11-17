@@ -17,7 +17,7 @@
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,183,0,0" TextWrapping="Wrap" Text="Tag" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Notification hub" VerticalAlignment="Top"/>
         <TextBox x:Name="txtNotification" HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="265"/>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,72,0,0" TextWrapping="Wrap" Text="Listen policy" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,72,0,0" TextWrapping="Wrap" Text="Policy" VerticalAlignment="Top"/>
         <TextBox x:Name="txtConnection" HorizontalAlignment="Left" Margin="10.124,99,0,0" TextWrapping="Wrap" Text="Endpoint=sb://[namespace].servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=[Key]" Height="80.333" Width="262.56" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <TextBox.RenderTransform>
                 <CompositeTransform SkewX="0.637" TranslateX="0.322"/>

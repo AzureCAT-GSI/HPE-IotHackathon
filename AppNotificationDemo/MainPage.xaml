@@ -16,13 +16,9 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/Background1.png" Stretch="UniformToFill" />
         </Grid.Background>
-        <Button x:Name="button" Content="Configure" HorizontalAlignment="Left" Click="button_Click" Margin="10,55,0,53" >
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
+        <Button x:Name="button" Content="Configure" HorizontalAlignment="Left" Click="button_Click" Margin="10,55,0,53" Width="340" >
+        </Button>
+        <Button x:Name="close" Content="Close" HorizontalAlignment="Left" Click="button_Close" Margin="10,98,0,10" Width="340"  >
         </Button>
     </Grid>
 </Page>
