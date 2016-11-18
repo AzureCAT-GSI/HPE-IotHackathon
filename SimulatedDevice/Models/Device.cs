@@ -9,6 +9,8 @@ namespace SimulatedDevice.Models
 {
 	public class Device
 	{
+        private long dwellTime;
+        private Room currentRoom;
 
 		public Device()
 		{
@@ -23,15 +25,27 @@ namespace SimulatedDevice.Models
 		[JsonProperty("StaMac")]
 		public string MacAddress { get; set; }
 
-        public Room CurrentRoom { get; set;  }
+        public Room CurrentRoom
+        {
+            get { return this.currentRoom; }
+            set
+            {
+                currentRoom = value;
+                if (value == null)  //moving out
+                {
+                    this.dwellTime = DateTime.UtcNow.Ticks - dwellTime;
+                }
+                else
+                {
+                    this.dwellTime = DateTime.UtcNow.Ticks;
+                }
+            }
+        }
 
 		[JsonProperty("StaMac")]
-		public string HashedMac
-		{
-			get
-			{
-				return DataGenerator.HashMacaddress(MacAddress);
-			}
-		}
-	}
+        public string HashedMac { get { return DataGenerator.HashMacaddress(MacAddress); } }
+
+        public uint DwellTime { get { return currentRoom == null ? (uint)TimeSpan.FromTicks(this.dwellTime).TotalSeconds : 0 ; } }
+
+    }
 }

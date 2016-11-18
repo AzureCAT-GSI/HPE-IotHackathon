@@ -9,8 +9,9 @@ using Microsoft.Azure.Devices.Client.Exceptions;
 using System.Threading;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using SimulatedDevice.Models;
 
-namespace SimulatedDevice.Models
+namespace SimulatedDevice
 {
 	public class DeviceTracker
 	{
@@ -64,21 +65,24 @@ namespace SimulatedDevice.Models
                 try
                 {
 
-                GeofenceEvent geoEvent = new Models.GeofenceEvent() {
-                    geofence_event = e.Event,
-                    geofence_id = e.geofence_id,
-                    geofence_name = e.RoomName,
-                    hashed_sta_mac = e.DeviceId};
-                Message message = new Message(Encoding.UTF8.GetBytes(await JsonConvert.SerializeObjectAsync(geoEvent)));
-                await deviceClient.SendEventAsync(message);
-                Console.WriteLine($"Wow, I've already sent {++numberMessages} messages during this session ");
+                    GeofenceEvent geoEvent = new Models.GeofenceEvent()
+                    {
+                        geofence_event = e.Event,
+                        geofence_id = e.geofence_id,
+                        geofence_name = e.RoomName,
+                        hashed_sta_mac = e.DeviceId,
+                        dwell_time = e.dwell_time
+                        
+                    };
+                    Message message = new Message(Encoding.UTF8.GetBytes(await JsonConvert.SerializeObjectAsync(geoEvent)));
+                    await deviceClient.SendEventAsync(message);
+                    Console.WriteLine($"Wow, I've already sent {++numberMessages} messages during this session ");
                 }
                 catch (Exception exception)
                 {
                     Console.WriteLine("Something unforeseen happend and I can't continue. See details below:");
                     Console.WriteLine(exception.Message);
                     Console.Write(exception.StackTrace);
-                    Console.ReadLine();
                 }
             }
         }

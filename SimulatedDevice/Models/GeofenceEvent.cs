@@ -12,5 +12,6 @@ namespace SimulatedDevice.Models
         public string geofence_event { get; set; }
         public string geofence_id { get; set; }
         public string hashed_sta_mac { get; set; }
+        public uint dwell_time { get; set; }
     }
 }

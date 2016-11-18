@@ -15,9 +15,11 @@ namespace SimulatedDevice.Models
 
 		[JsonProperty("geofence_name")]
 		public string Name { get; set; }
+
 		[JsonProperty("geofence_id")]
 		public string Id { get; set; }
-		List<DwellTimeIndex> deviceDwellTimeIndex = null;
+
+        List<DwellTimeIndex> deviceDwellTimeIndex = null;
 
         public event DeviceMovedEventHandler OnDeviceMoved;
 
@@ -39,10 +41,9 @@ namespace SimulatedDevice.Models
 			{
 				devicesInRoom.Add(deviceToAdd);
                 deviceToAdd.CurrentRoom = this;
-
-				DwellTimeIndex ds = new DwellTimeIndex();
-				ds.DeviceToIndex = deviceToAdd;
-				deviceDwellTimeIndex.Add(ds);
+				//DwellTimeIndex ds = new DwellTimeIndex();
+				//ds.DeviceToIndex = deviceToAdd;
+				//deviceDwellTimeIndex.Add(ds);
 				RaiseMoveEvent(deviceToAdd, "ZONE_IN");
 			}
 		}
@@ -70,6 +71,7 @@ namespace SimulatedDevice.Models
 			args.geofence_id = this.Id;
 			args.DeviceId = deviceToAdd.MacAddress;
 			args.Event = zoneEventType;
+            args.dwell_time = deviceToAdd.DwellTime;
             OnDeviceMoved?.Invoke(this, args);
         }
 
