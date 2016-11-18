@@ -24,7 +24,7 @@ namespace CreateDeviceIdentity
 
         private static async Task AddDeviceAsync()
         {
-            string deviceId = "Device_1";
+            string deviceId = "Kimmos";
             Device device;
             try
             {
