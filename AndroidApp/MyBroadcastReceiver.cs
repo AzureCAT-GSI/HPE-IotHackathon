@@ -91,7 +91,7 @@ namespace AndroidApp
             string messageText = intent.Extras.GetString("message");
             if (!string.IsNullOrEmpty(messageText))
             {
-                createNotification("New hub message!", messageText);
+                createNotification("New message!", messageText);
             }
             else
             {

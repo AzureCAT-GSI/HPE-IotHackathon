@@ -37,20 +37,32 @@ namespace GSIAppNotificationDemo
         }
         private async void InitNotificationsAsync(string tag)
         {
-            var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-
-            var hub = new NotificationHub(txtNotification.Text, txtConnection.Text);
-            string[] userTag = new string[1];
-            userTag[0] = tag;
-
-            var result = await hub.RegisterNativeAsync(channel.Uri, userTag);
-
-            // Displays the registration ID so you know it was successful
-            if (result.RegistrationId != null)
+            try
             {
-                // txtResult.Text = ;
-                var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
-                await dialog.ShowAsync();
+                PushNotificationChannel channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+
+                NotificationHub hub = new NotificationHub(txtNotification.Text, txtConnection.Text);
+                string[] userTag = new string[1];
+                userTag[0] = tag;
+
+                var result = await hub.RegisterNativeAsync(channel.Uri, userTag); //
+
+                // Displays the registration ID so you know it was successful
+                if (result.RegistrationId != null)
+                {
+                    // txtResult.Text = ;
+                    var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+                    await dialog.ShowAsync();
+                }
+            }
+            catch (Exception Ex)
+            {
+                if (null != Ex.InnerException)
+                {
+                    var dialog = new MessageDialog("Error when registering: " + Ex.InnerException.Message);
+                    await dialog.ShowAsync();
+                }
+
             }
 
 
@@ -59,28 +71,43 @@ namespace GSIAppNotificationDemo
 
         private async void Unregister()
         {
-            var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+            try
+            {
+                PushNotificationChannel channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
 
-            var hub = new NotificationHub(txtNotification.Text, txtConnection.Text);
-            await hub.UnregisterAllAsync(channel.Uri);
-            
+                NotificationHub hub = new NotificationHub(txtNotification.Text, txtConnection.Text);
+                await hub.UnregisterAllAsync(channel.Uri);
+            }
+            catch(Exception Ex)
+            { }
 
         }
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            InitNotificationsAsync(txtTag.Text);
-
-            Windows.Storage.ApplicationDataContainer localSettings =    Windows.Storage.ApplicationData.Current.LocalSettings;
-            localSettings.Values["NotificationHub"] = txtNotification.Text;
-            localSettings.Values["ConnectionString"] = txtConnection.Text;
-            localSettings.Values["Tag"] = txtTag.Text;
 
 
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+
+        }
+        private void btn_UnRegister_Click(object sender, RoutedEventArgs e)
+        {
+
             Unregister();
+        }
+
+
+        private void btn_Register_Click(object sender, RoutedEventArgs e)
+        {
+            InitNotificationsAsync(txtTag.Text);
+
+            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["NotificationHub"] = txtNotification.Text;
+            localSettings.Values["ConnectionString"] = txtConnection.Text;
+            localSettings.Values["Tag"] = txtTag.Text;
+
         }
     }
 }

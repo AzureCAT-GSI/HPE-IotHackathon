@@ -7,13 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="Configuration"
-    PrimaryButtonText="Register"
-    SecondaryButtonText="Unregister"
+    PrimaryButtonText="OK"
+    SecondaryButtonText="Cancel"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 
-    <Grid Height="250" Width="285">
-        <TextBox x:Name="txtTag" Margin="0,208,10,10" TextWrapping="Wrap" Text="" Tag="tag" HorizontalAlignment="Right" Width="265"/>
+    <Grid Height="315" Width="285">
+        <TextBox x:Name="txtTag" Margin="0,208,10,0" TextWrapping="Wrap" Text="" Tag="tag" HorizontalAlignment="Right" Width="265" Height="32" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,183,0,0" TextWrapping="Wrap" Text="Tag" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Notification hub" VerticalAlignment="Top"/>
         <TextBox x:Name="txtNotification" HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="265"/>
@@ -23,6 +23,9 @@
                 <CompositeTransform SkewX="0.637" TranslateX="0.322"/>
             </TextBox.RenderTransform>
         </TextBox>
-       
+        <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" Margin="10,254,0,0" VerticalAlignment="Top" Click="btn_Register_Click"/>
+        <Button x:Name="btnUnRegister" Content="UnRegister" HorizontalAlignment="Left" Margin="103,254,0,0" VerticalAlignment="Top" Click="btn_UnRegister_Click"/>
+
+
     </Grid>
 </ContentDialog>

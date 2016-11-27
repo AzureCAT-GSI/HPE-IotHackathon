@@ -22,6 +22,7 @@
         <EditText
             p1:id="@+id/txtPolicy"
             p1:layout_width="match_parent"
+            p1:inputType="textMultiLine"
             p1:layout_height="wrap_content"
             p1:minLines="2"
             p1:lines="3"

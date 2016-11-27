@@ -17,7 +17,7 @@ namespace AndroidApp
         public string Tag;
     }
 
-    [Activity(Label = "AndroidApp", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Proximity App", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
 
@@ -60,6 +60,8 @@ namespace AndroidApp
 
     protected override void OnStart()
         {
+
+            Title = "Proximity App";
             // Get your button from the layout resource,
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.btnRegister);
@@ -117,6 +119,7 @@ namespace AndroidApp
         {
             instance = this;
             configuration = new Configuration();
+            
 
             base.OnCreate(bundle);
 
@@ -124,8 +127,8 @@ namespace AndroidApp
             try
             {
                 var prefs = Application.Context.GetSharedPreferences("MyApp", FileCreationMode.Private);
-                configuration.NotificationHub = prefs.GetString("NotificationHub", "kfnotificationhub"); ;
-                configuration.ConnectionString = prefs.GetString("ListenConnectionString", "Endpoint=sb://kfarubaiotdemo.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=VL9FZEckq+lIt3ejtgj7lI9h0b0hOCB9kc5nf4I5fKE=");
+                configuration.NotificationHub = prefs.GetString("NotificationHub", "<notificationhubname>"); ;
+                configuration.ConnectionString = prefs.GetString("ListenConnectionString", "Endpoint=sb://<namespace>.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=<key>");
                 configuration.Tag = prefs.GetString("Tag", null);
             }
             catch(Exception Ex)

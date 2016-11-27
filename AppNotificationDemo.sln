@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppNotificationDemo", "AppNotificationDemo\AppNotificationDemo.csproj", "{8BE4B294-5D6A-4F26-8E46-123A556EBE07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proximity APP-UWP", "AppNotificationDemo\Proximity APP-UWP.csproj", "{8BE4B294-5D6A-4F26-8E46-123A556EBE07}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "commandNotifier", "commandNotifier\commandNotifier.csproj", "{25A5508C-E252-4D09-9EE9-21F5C24DE570}"
 EndProject
@@ -13,9 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulatedDevice", "Simulate
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushBackgroundComponent", "PushBackgroundComponent\PushBackgroundComponent.csproj", "{F2397E71-EBD2-43F4-B2CE-CF6F58BF67CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidApp", "AndroidApp\AndroidApp.csproj", "{C5E08703-4B82-4089-9BAE-0A4F09DC181D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proximity App", "AndroidApp\Proximity App.csproj", "{C5E08703-4B82-4089-9BAE-0A4F09DC181D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLoader", "DataLoader\DataLoader.csproj", "{4585904A-CBEF-4D93-952D-7269F8AF2A3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UITest1", "UITest1\UITest1.csproj", "{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -153,6 +155,22 @@ Global
 		{4585904A-CBEF-4D93-952D-7269F8AF2A3A}.Release|x64.Build.0 = Release|Any CPU
 		{4585904A-CBEF-4D93-952D-7269F8AF2A3A}.Release|x86.ActiveCfg = Release|Any CPU
 		{4585904A-CBEF-4D93-952D-7269F8AF2A3A}.Release|x86.Build.0 = Release|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Debug|ARM.Build.0 = Debug|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Debug|x64.Build.0 = Debug|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Debug|x86.Build.0 = Debug|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Release|ARM.Build.0 = Release|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Release|x64.ActiveCfg = Release|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Release|x64.Build.0 = Release|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Release|x86.ActiveCfg = Release|Any CPU
+		{D0D9B4D4-C690-457A-BD6E-5DEFF229CCFD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

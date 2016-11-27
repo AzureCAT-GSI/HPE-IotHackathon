@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataGenerator.cs" />
+    <Compile Include="DeviceTracker.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\DeviceMoveEventArgs.cs" />
@@ -157,7 +158,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

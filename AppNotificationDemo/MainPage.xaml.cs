@@ -41,7 +41,6 @@ namespace KFAppNotificationDemo
             ContentDialog1 dialog = new ContentDialog1()
             {
                 Title = "Configure connection",
-                PrimaryButtonText = "Register"
             };
 
             await dialog.ShowAsync();
@@ -54,7 +53,9 @@ namespace KFAppNotificationDemo
 
         private void button_Close(object sender, RoutedEventArgs e)
         {
-            
+            Application.Current.Exit();
+
+
         }
     }
 }
