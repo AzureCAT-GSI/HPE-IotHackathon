@@ -37,43 +37,14 @@ namespace KFAppNotificationDemo
         }
 
 
-        private async void InitNotificationsAsync(string tag)
-        {
-            var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-
-            var hub = new NotificationHub("kfnotificationhub", "Endpoint=sb://kfarubaiotdemo.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=VL9FZEckq+lIt3ejtgj7lI9h0b0hOCB9kc5nf4I5fKE=");
-            string[] userTag = new string[1];
-            userTag[0] = tag;
-
-            //var result = await hub.RegisterNativeAsync(channel.Uri, userTag);
-            var result = await hub.RegisterNativeAsync(channel.Uri);
-
-            // Displays the registration ID so you know it was successful
-            if (result.RegistrationId != null)
-            {
-
-                //NotificationHubClient client = NotificationHubClient.CreateClientFromConnectionString("Endpoint=sb://kfarubademo.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=CHiZZ2Sw203TSBW79H7DbjNESWRJS0mQd5uLXe5e9uE=", "kfnotificationhub");
-
-                //var reg = await client.GetRegistrationAsync<GcmRegistrationDescription>(result.RegistrationId);
-
-                // update the reg object
-
-                //await client.UpdateRegistrationAsync(reg);
-
-                var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
-                dialog.Commands.Add(new UICommand("OK"));
-                await dialog.ShowAsync();
-            }
-
-        }
-        /// <summary>
+         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            //InitNotificationsAsync("MyTag");
+  
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {

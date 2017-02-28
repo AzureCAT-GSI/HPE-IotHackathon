@@ -7,9 +7,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-        <TextBox x:Name="tag" PlaceholderText="tag" Text="b158a026e9416aa2a307541bfe205ae44b4ca660" Margin="10,85,59,469" ></TextBox>
-        <Button x:Name="button" Content="Register" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Click="button_Click"/>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+            
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Background1.png" Stretch="UniformToFill" />
+        </Grid.Background>
+        <Button x:Name="button" Content="Configure" HorizontalAlignment="Left" Click="button_Click" Margin="10,55,0,53" Width="340" Foreground="AntiqueWhite">
+        </Button>
+        <Button x:Name="close" Content="Close" HorizontalAlignment="Left" Click="button_Close" Margin="10,98,0,10" Width="340"  Foreground="AntiqueWhite" >
+        </Button>
     </Grid>
 </Page>

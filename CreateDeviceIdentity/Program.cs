@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices;
 using Microsoft.Azure.Devices.Common.Exceptions;
+using System.Configuration;
 
 namespace CreateDeviceIdentity
 {
@@ -13,7 +14,7 @@ namespace CreateDeviceIdentity
     {
 
         static RegistryManager registryManager;
-        static string connectionString = "HostName=kfIoThub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=3rQBsxaPSLG05944GfZpMkDchq9IjCyP76Kayub7mK4=";
+        static string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
         static void Main(string[] args)
         {
             registryManager = RegistryManager.CreateFromConnectionString(connectionString);
@@ -23,7 +24,7 @@ namespace CreateDeviceIdentity
 
         private static async Task AddDeviceAsync()
         {
-            string deviceId = "Device_1";
+            string deviceId = "Kimmos";
             Device device;
             try
             {

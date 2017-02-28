@@ -1,0 +1,31 @@
+﻿<ContentDialog
+    x:Class="GSIAppNotificationDemo.ContentDialog1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GSIAppNotificationDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Configuration"
+    PrimaryButtonText="OK"
+    SecondaryButtonText="Cancel"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <Grid Height="315" Width="285">
+        <TextBox x:Name="txtTag" Margin="0,208,10,0" TextWrapping="Wrap" Text="" Tag="tag" HorizontalAlignment="Right" Width="265" Height="32" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,183,0,0" TextWrapping="Wrap" Text="Tag" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Notification hub" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtNotification" HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="265"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,72,0,0" TextWrapping="Wrap" Text="Policy" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtConnection" HorizontalAlignment="Left" Margin="10.124,99,0,0" TextWrapping="Wrap" Text="Endpoint=sb://[namespace].servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=[Key]" Height="80.333" Width="262.56" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <TextBox.RenderTransform>
+                <CompositeTransform SkewX="0.637" TranslateX="0.322"/>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" Margin="10,254,0,0" VerticalAlignment="Top" Click="btn_Register_Click"/>
+        <Button x:Name="btnUnRegister" Content="UnRegister" HorizontalAlignment="Left" Margin="103,254,0,0" VerticalAlignment="Top" Click="btn_UnRegister_Click"/>
+
+
+    </Grid>
+</ContentDialog>
