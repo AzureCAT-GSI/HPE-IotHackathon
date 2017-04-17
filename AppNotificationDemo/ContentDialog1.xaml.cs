@@ -42,18 +42,34 @@ namespace GSIAppNotificationDemo
                 PushNotificationChannel channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
 
                 NotificationHub hub = new NotificationHub(txtNotification.Text, txtConnection.Text);
-                string[] userTag = tag.Split(';');
+                
                 //userTag[0] = tag;
-
-                var result = await hub.RegisterNativeAsync(channel.Uri, userTag); //
-
-                // Displays the registration ID so you know it was successful
-                if (result.RegistrationId != null)
+                if(String.IsNullOrWhiteSpace(tag))
                 {
-                    // txtResult.Text = ;
-                    var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
-                    await dialog.ShowAsync();
+                    string[] userTag = tag.Split(';');
+                    var result = await hub.RegisterNativeAsync(channel.Uri, userTag); //
+
+                    // Displays the registration ID so you know it was successful
+                    if (result.RegistrationId != null)
+                    {
+                        // txtResult.Text = ;
+                        var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+                        await dialog.ShowAsync();
+                    }
                 }
+                else
+                {
+                    var result = await hub.RegisterNativeAsync(channel.Uri, null); //
+
+                    // Displays the registration ID so you know it was successful
+                    if (result.RegistrationId != null)
+                    {
+                        // txtResult.Text = ;
+                        var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+                        await dialog.ShowAsync();
+                    }
+                }
+                
             }
             catch (Exception Ex)
             {
