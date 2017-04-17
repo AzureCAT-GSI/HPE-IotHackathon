@@ -42,8 +42,8 @@ namespace GSIAppNotificationDemo
                 PushNotificationChannel channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
 
                 NotificationHub hub = new NotificationHub(txtNotification.Text, txtConnection.Text);
-                string[] userTag = tag.Split(';');
-                //userTag[0] = tag;
+                string[] userTag = new string[1];
+                userTag[0] = tag;
 
                 var result = await hub.RegisterNativeAsync(channel.Uri, userTag); //
 

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{02629CC2-1588-44F4-9937-1FBED269E822}</ProjectGuid>
+    <ProjectGuid>{8BE4B294-5D6A-4F26-8E46-123A556EBE07}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GSIAppNotificationDemo</RootNamespace>

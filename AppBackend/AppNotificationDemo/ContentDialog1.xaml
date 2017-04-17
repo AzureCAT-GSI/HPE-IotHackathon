@@ -14,7 +14,7 @@
 
     <Grid Height="315" Width="285">
         <TextBox x:Name="txtTag" Margin="0,208,10,0" TextWrapping="Wrap" Text="" Tag="tag" HorizontalAlignment="Right" Width="265" Height="32" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,183,0,0" TextWrapping="Wrap" Text="Fan(s) ; separated" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,183,0,0" TextWrapping="Wrap" Text="Tag" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Notification hub" VerticalAlignment="Top"/>
         <TextBox x:Name="txtNotification" HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="265"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,72,0,0" TextWrapping="Wrap" Text="Policy" VerticalAlignment="Top"/>
