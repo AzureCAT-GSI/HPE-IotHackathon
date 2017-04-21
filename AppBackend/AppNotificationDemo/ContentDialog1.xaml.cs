@@ -42,34 +42,18 @@ namespace GSIAppNotificationDemo
                 PushNotificationChannel channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
 
                 NotificationHub hub = new NotificationHub(txtNotification.Text, txtConnection.Text);
-                
-                //userTag[0] = tag;
-                if(String.IsNullOrWhiteSpace(tag))
-                {
-                    string[] userTag = tag.Split(';');
-                    var result = await hub.RegisterNativeAsync(channel.Uri, userTag); //
+                string[] userTag = new string[1];
+                userTag[0] = tag;
 
-                    // Displays the registration ID so you know it was successful
-                    if (result.RegistrationId != null)
-                    {
-                        // txtResult.Text = ;
-                        var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
-                        await dialog.ShowAsync();
-                    }
-                }
-                else
-                {
-                    var result = await hub.RegisterNativeAsync(channel.Uri, null); //
+                var result = await hub.RegisterNativeAsync(channel.Uri, userTag); //
 
-                    // Displays the registration ID so you know it was successful
-                    if (result.RegistrationId != null)
-                    {
-                        // txtResult.Text = ;
-                        var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
-                        await dialog.ShowAsync();
-                    }
+                // Displays the registration ID so you know it was successful
+                if (result.RegistrationId != null)
+                {
+                    // txtResult.Text = ;
+                    var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+                    await dialog.ShowAsync();
                 }
-                
             }
             catch (Exception Ex)
             {
