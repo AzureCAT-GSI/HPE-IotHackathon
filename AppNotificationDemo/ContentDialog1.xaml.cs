@@ -46,7 +46,7 @@ namespace GSIAppNotificationDemo
                 //userTag[0] = tag;
                 if(String.IsNullOrWhiteSpace(tag))
                 {
-                    string[] userTag = tag.Split(';');
+                    string[] userTag = tag.Split(";".ToCharArray());
                     var result = await hub.RegisterNativeAsync(channel.Uri, userTag); //
 
                     // Displays the registration ID so you know it was successful

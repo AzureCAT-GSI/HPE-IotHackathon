@@ -63,16 +63,31 @@ namespace AndroidApp
                 Log.Error(Constants.Tag, ex.Message);
             }
 
-            var tags = new List<string>() { Constants.Tag }; // create tags if you want
-           // var tags = new List<string>() { };
+            if (Constants.Tag.Length >0)
+            {
+                var tags = new List<string>() { Constants.Tag }; // create tags if you want
+                                                                 // var tags = new List<string>() { };
 
-            try
-            {
-                var hubRegistration = Hub.Register(registrationId, tags.ToArray());
+                try
+                {
+                    var hubRegistration = Hub.Register(registrationId, tags.ToArray());
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(Constants.Tag, ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Log.Error(Constants.Tag, ex.Message);
+                try
+                {
+                    var hubRegistration = Hub.Register(registrationId, null);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(Constants.Tag, ex.Message);
+                }
+
             }
         }
 
