@@ -24,6 +24,7 @@ namespace GSIAppNotificationDemo
     {
         public ContentDialog1()
         {
+            string registrationID = String.Empty;
             this.InitializeComponent();
             try
             {
@@ -44,7 +45,7 @@ namespace GSIAppNotificationDemo
                 NotificationHub hub = new NotificationHub(txtNotification.Text, txtConnection.Text);
                 
                 //userTag[0] = tag;
-                if(String.IsNullOrWhiteSpace(tag))
+                if(!String.IsNullOrWhiteSpace(tag))
                 {
                     string[] userTag = tag.Split(";".ToCharArray());
                     var result = await hub.RegisterNativeAsync(channel.Uri, userTag); //
@@ -52,14 +53,15 @@ namespace GSIAppNotificationDemo
                     // Displays the registration ID so you know it was successful
                     if (result.RegistrationId != null)
                     {
+                        //registrationID = result.RegistrationId;
                         // txtResult.Text = ;
-                        var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+                        var dialog = new MessageDialog("Registration successful: " + result.RegistrationId + ". Channel Uri = " + channel.Uri);
                         await dialog.ShowAsync();
                     }
                 }
                 else
                 {
-                    var result = await hub.RegisterNativeAsync(channel.Uri, null); //
+                    Registration result = await hub.RegisterNativeAsync(channel.Uri, null); //
 
                     // Displays the registration ID so you know it was successful
                     if (result.RegistrationId != null)
@@ -85,14 +87,27 @@ namespace GSIAppNotificationDemo
         }
 
 
-        private async void Unregister()
+        private async void Unregister(string tag)
         {
             try
             {
                 PushNotificationChannel channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
 
                 NotificationHub hub = new NotificationHub(txtNotification.Text, txtConnection.Text);
-                await hub.UnregisterAllAsync(channel.Uri);
+
+                if (!String.IsNullOrWhiteSpace(tag))
+                {
+
+
+                    string[] userTag = tag.Split(";".ToCharArray());
+                    Registration reg = new Registration(channel.Uri, userTag);
+                    await hub.UnregisterAsync(reg);
+                }
+                else
+                {
+                    Registration reg = new Registration(channel.Uri);
+                    await hub.UnregisterAsync(reg);
+                }
             }
             catch(Exception Ex)
             { }
@@ -111,7 +126,7 @@ namespace GSIAppNotificationDemo
         private void btn_UnRegister_Click(object sender, RoutedEventArgs e)
         {
 
-            Unregister();
+            Unregister(txtTag.Text);
         }
 
 
