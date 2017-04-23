@@ -358,11 +358,13 @@
     <Language Code="zu-za" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>19024KimmoForss.KFAppNotificationDemo</MainPackageIdentityName>
+    <MainPackageIdentityName>19024KimmoForss.FanAppDemo</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>KFAppNotificationDemo</ReservedName>
+      <ReservedName>FanAppDemo</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
-  <AccountPackageIdentityNames />
-  <PackageInfoList LandingUrl="https://developer.microsoft.com/dashboard/Application?appId=9NBLGGH43K4F" />
+  <AccountPackageIdentityNames>
+    <MainPackageIdentityName>19024KimmoForss.KFAppNotificationDemo</MainPackageIdentityName>
+  </AccountPackageIdentityNames>
+  <PackageInfoList LandingUrl="https://developer.microsoft.com/dashboard/Application?appId=9MW3Q07LPTLM" />
 </StoreAssociation>

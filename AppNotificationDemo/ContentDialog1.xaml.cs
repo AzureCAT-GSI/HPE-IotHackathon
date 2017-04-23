@@ -58,6 +58,11 @@ namespace GSIAppNotificationDemo
                         var dialog = new MessageDialog("Registration successful: " + result.RegistrationId + ". Channel Uri = " + channel.Uri);
                         await dialog.ShowAsync();
                     }
+                    else
+                    {
+                        var dialog = new MessageDialog("Registration failed");
+                        await dialog.ShowAsync();
+                    }
                 }
                 else
                 {
