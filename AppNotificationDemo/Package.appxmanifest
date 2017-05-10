@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" IgnorableNamespaces="uap mp uap3">
-  <Identity Name="19024KimmoForss.FanAppDemo" Publisher="CN=7EBD86D6-9EDA-4CB2-A4DD-9A6A7A04CAC2" Version="1.1.4.0" />
+  <Identity Name="19024KimmoForss.FanAppDemo" Publisher="CN=7EBD86D6-9EDA-4CB2-A4DD-9A6A7A04CAC2" Version="1.1.5.0" />
   <mp:PhoneIdentity PhoneProductId="ba733552-0103-468d-8e0a-3ccb3a13d267" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>FanAppDemo</DisplayName>

@@ -43,40 +43,54 @@ namespace KFAppNotificationDemo
             string Connection = (string)localSettings.Values["ConnectionString"];
             string Tag = (string)localSettings.Values["Tag"];
 
-            NotificationHub hub = new NotificationHub(Notification, Connection);
-
-            //userTag[0] = tag;
-            if (!String.IsNullOrWhiteSpace(Tag))
+            try
             {
-                string[] userTag = Tag.Split(";".ToCharArray());
-                var result = await hub.RegisterNativeAsync(channel.Uri, userTag); //
 
-                // Displays the registration ID so you know it was successful
-                if (result.RegistrationId != null)
+                NotificationHub hub = new NotificationHub(Notification, Connection);
+
+                //userTag[0] = tag;
+                if (!String.IsNullOrWhiteSpace(Tag))
                 {
+                    string[] userTag = Tag.Split(";".ToCharArray());
+                    var result = await hub.RegisterNativeAsync(channel.Uri, userTag); //
+
+                    // Displays the registration ID so you know it was successful
+                    if (result.RegistrationId != null)
+                    {
+                    }
+                    else
+                    {
+                        var dialog = new MessageDialog("Registration failed. Please check the configuration");
+                        await dialog.ShowAsync();
+                    }
                 }
                 else
                 {
-                    var dialog = new MessageDialog("Registration failed. Please check the configuration");
-                    await dialog.ShowAsync();
+                    Registration result = await hub.RegisterNativeAsync(channel.Uri, null); //
+
+                    // Displays the registration ID so you know it was successful
+                    if (result.RegistrationId != null)
+                    {
+                        //// txtResult.Text = ;
+                        //var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+                        //await dialog.ShowAsync();
+                    }
+                    else
+                    {
+                        var dialog = new MessageDialog("Registration failed. Please check the configuration");
+                        await dialog.ShowAsync();
+                    }
                 }
             }
-            else
+            catch(Exception Ex)
             {
-                Registration result = await hub.RegisterNativeAsync(channel.Uri, null); //
+                ContentDialog1 dialog = new ContentDialog1()
+                {
+                    Title = "Configure connection",
+                };
 
-                // Displays the registration ID so you know it was successful
-                if (result.RegistrationId != null)
-                {
-                    //// txtResult.Text = ;
-                    //var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
-                    //await dialog.ShowAsync();
-                }
-                else
-                {
-                    var dialog = new MessageDialog("Registration failed. Please check the configuration");
-                    await dialog.ShowAsync();
-                }
+                await dialog.ShowAsync();
+
             }
 
         }
