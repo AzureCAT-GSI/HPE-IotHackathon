@@ -5,20 +5,23 @@
     xmlns:local="using:KFAppNotificationDemo"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    SizeChanged="update_size"
 
-    <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
-            <RowDefinition Height="*"/>
-            
-        </Grid.RowDefinitions>
+    >
+    <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/Background1.png" Stretch="UniformToFill" />
         </Grid.Background>
-        <Button x:Name="button" Content="Configure" HorizontalAlignment="Left" Click="button_Click" Margin="10,55,0,53" Width="340" Foreground="AntiqueWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height ="*"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="button" Content="Configure" HorizontalAlignment="Left" Click="button_Click" Margin="10,24,0,30" Width="200" Foreground="AntiqueWhite" Height="46" Grid.Column="0" Grid.Row="0">
         </Button>
-        <Button x:Name="close" Content="Close" HorizontalAlignment="Left" Click="button_Close" Margin="10,98,0,10" Width="340"  Foreground="AntiqueWhite" >
-        </Button>
+        <Button x:Name="close" Content="Close" HorizontalAlignment="Left" Click="button_Close" Margin="430,24,0,30" Width="200"  Foreground="AntiqueWhite" Height="46" Grid.Row="0"/>
+        <TextBox x:Name="txtNotifications" TextWrapping="Wrap" Text="" IsReadOnly="True" Grid.Row="1" AcceptsReturn="True"/>
+
     </Grid>
 </Page>

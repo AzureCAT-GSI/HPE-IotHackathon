@@ -1,12 +1,15 @@
 ﻿using Microsoft.WindowsAzure.Messaging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Data.Json;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Networking.PushNotifications;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -33,7 +36,7 @@ namespace GSIAppNotificationDemo
                 txtConnection.Text = (string)localSettings.Values["ConnectionString"];
                 txtTag.Text = (string)localSettings.Values["Tag"];
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             { }
         }
         private async void InitNotificationsAsync(string tag)
@@ -43,9 +46,9 @@ namespace GSIAppNotificationDemo
                 PushNotificationChannel channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
 
                 NotificationHub hub = new NotificationHub(txtNotification.Text, txtConnection.Text);
-                
+
                 //userTag[0] = tag;
-                if(!String.IsNullOrWhiteSpace(tag))
+                if (!String.IsNullOrWhiteSpace(tag))
                 {
                     string[] userTag = tag.Split(";".ToCharArray());
                     var result = await hub.RegisterNativeAsync(channel.Uri, userTag); //
@@ -76,7 +79,7 @@ namespace GSIAppNotificationDemo
                         await dialog.ShowAsync();
                     }
                 }
-                
+
             }
             catch (Exception Ex)
             {
@@ -90,7 +93,6 @@ namespace GSIAppNotificationDemo
 
 
         }
-
 
         private async void Unregister(string tag)
         {
@@ -114,7 +116,7 @@ namespace GSIAppNotificationDemo
                     await hub.UnregisterAsync(reg);
                 }
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             { }
 
         }

@@ -45,7 +45,7 @@ namespace commandNotifier
         private static async void aSendNotificationAsync(string tag)
         {
             string conf = ConfigurationManager.AppSettings["Microsoft.Azure.NotificationHubs.ConnectionString"];
-            NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString("Endpoint=sb://mscomiot.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=KWPPz5X2A64jQSjPdcubw+SdxaUnV6mLp+5LFSgmyfE=", "msnotification");
+            NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString("Endpoint=sb://hmihub.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=YiwRli3oMZ8kPnd/U6PranONOG/uXaQSF0aqnRZncPM=", "emeahminofificationhub");
             var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">Hello from a .NET App!</text></binding></visual></toast>";
             //await hub.SendWindowsNativeNotificationAsync(toast,"myTag");
             await hub.SendWindowsNativeNotificationAsync(toast,tag);
@@ -54,7 +54,7 @@ namespace commandNotifier
         private static async void gSendNotificationAsync(string tag)
         {
             string conf = ConfigurationManager.AppSettings["Microsoft.Azure.NotificationHubs.ConnectionString"];
-            NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString("Endpoint=sb://mscomiot.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=KWPPz5X2A64jQSjPdcubw+SdxaUnV6mLp+5LFSgmyfE=", "msnotification");
+            NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString("Endpoint=sb://hmihub.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=3kr9bLYgGwFWAUPn6boBYw8IRiYoAkPoPbPRA849o7A=", "emeahminofificationhub");
             var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">Hello from a .NET App!</text></binding></visual></toast>";
             //await hub.SendWindowsNativeNotificationAsync(toast,"myTag");
             GcmNotification gcm = new GcmNotification("{\"data\":{\"message\":\"Hej Robin\"}}");
@@ -69,8 +69,30 @@ namespace commandNotifier
         {
 
             SendTemplateNotificationAsync();
-            gSendNotificationAsync("hej");
-            Console.ReadLine();
+            //   gSendNotificationAsync("hej");
+            try
+            {
+                aSendNotificationAsync("Node1");
+            }
+            catch(System.UnauthorizedAccessException uEx)
+            {
+                Console.WriteLine(uEx.Message);
+                if(uEx.InnerException != null)
+                {
+                    Console.WriteLine(uEx.InnerException.Message);
+                }
+                Console.ReadLine();
+            }
+            catch(Exception Ex)
+            {
+                Console.WriteLine(Ex.Message);
+                if(Ex.InnerException != null)
+                {
+                    Console.WriteLine(Ex.InnerException.Message);
+                }
+                Console.ReadLine();
+            }
+            
         }
     }
 }
